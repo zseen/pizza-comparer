@@ -3,7 +3,7 @@ public class Pizza {
 
 	private int diameter;
 	private double price;
-	private double area;
+	//private double area;
 
 	public void setDiameterAndPrice(int diameter, double price) {
 		this.diameter = diameter;
@@ -19,11 +19,14 @@ public class Pizza {
 	}
 
 	public double getArea() {
-		this.calculateArea();
-		return this.area;
+		return this.calculateArea();
+	}
+	
+	public double getPricePerUnit() {
+		return this.price / this.getArea();
 	}
 
-	private void calculateArea() {
-		this.area = Math.pow(this.diameter / 2, 2) * Math.PI;
+	private double calculateArea() {
+		return (this.diameter / 2) * (this.diameter / 2) * Math.PI;
 	}
 }

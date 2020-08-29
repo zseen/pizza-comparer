@@ -1,13 +1,33 @@
 import java.util.*;
 
+
+
+
+
 class AmountComparer {
+	public enum Values {
+		FIRST ("The first pizza is better value"),
+		EQUAL ("They are equal value - choose the one that you prefer!"),
+		SECOND ("The second pizza is better value");
+
+		private final String levelCode;
+
+	    Values (String levelCode) {
+	        this.levelCode = levelCode;
+	    }
+	    
+	    public String getLevelCode() {
+	        return this.levelCode;
+	    }
+		
+	}
+
+	
 	public static int comparePizzas(Pizza firstPizza, Pizza secondPizza) {
-		double firstPizzaPricePerUnit = firstPizza.getPrice() / firstPizza.getArea();
-		double secondPizzaPricePerUnit = secondPizza.getPrice() / secondPizza.getArea();
 
 		// result is -1 if the first pizza is better value, 1 if the second pizza is
 		// better value, and 0 if they are equal value
-		int result = Double.compare(firstPizzaPricePerUnit, secondPizzaPricePerUnit);
+		int result = Double.compare(firstPizza.getPricePerUnit(), secondPizza.getPricePerUnit());
 		return result;
 
 	}
@@ -52,11 +72,12 @@ class AmountComparer {
 
 		int result = comparePizzas(firstPizza, secondPizza);
 		if (result == -1) {
-			System.out.println("The first pizza is better value");
+			Values val = Values.FIRST;
+			System.out.println (val.getLevelCode());
 		} else if (result == 1) {
-			System.out.println("The second pizza is better value");
+			System.out.println(Values.SECOND);
 		} else {
-			System.out.println("They are the same value - choose the one you prefer!");
+			System.out.println(Values.EQUAL);
 		}
 	}
 
