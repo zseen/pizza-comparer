@@ -26,8 +26,8 @@ class AmountComparerTest {
 		Pizza secondPizza = new Pizza();
 		secondPizza.setDiameterAndPrice(10, 8.99);
 
-		AmountComparer.Values result = AmountComparer.comparePizzas(firstPizza, secondPizza);
-		assertEquals(result, AmountComparer.Values.SECOND);
+		Enum result = AmountComparer.comparePizzas(firstPizza, secondPizza);
+		assertEquals(result, 1); // 1 means that the second pizza is better value
 	}
 
 	@Test
@@ -38,8 +38,8 @@ class AmountComparerTest {
 		Pizza secondPizza = new Pizza();
 		secondPizza.setDiameterAndPrice(10, 10.00);
 
-		AmountComparer.Values result = AmountComparer.comparePizzas(firstPizza, secondPizza);
-		assertEquals(result, AmountComparer.Values.FIRST);
+		int result = AmountComparer.comparePizzas(firstPizza, secondPizza);
+		assertEquals(result, -1); // -1 means that the first pizza is better value
 	}
 
 	@Test
@@ -50,8 +50,8 @@ class AmountComparerTest {
 		Pizza secondPizza = new Pizza();
 		secondPizza.setDiameterAndPrice(15, 10.00);
 
-		AmountComparer.Values result = AmountComparer.comparePizzas(firstPizza, secondPizza);
-		assertEquals(result, AmountComparer.Values.EQUAL);
+		int result = AmountComparer.comparePizzas(firstPizza, secondPizza);
+		assertEquals(result, 0); // 0 means that they are of equal value
 
 	}
 }

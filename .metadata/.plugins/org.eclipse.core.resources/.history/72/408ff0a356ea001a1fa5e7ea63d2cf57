@@ -27,7 +27,7 @@ class AmountComparerTest {
 		secondPizza.setDiameterAndPrice(10, 8.99);
 
 		AmountComparer.Values result = AmountComparer.comparePizzas(firstPizza, secondPizza);
-		assertEquals(result, AmountComparer.Values.SECOND);
+		assertEquals(result, AmountComparer.Values.SECOND); // 1 means that the second pizza is better value
 	}
 
 	@Test
@@ -39,7 +39,7 @@ class AmountComparerTest {
 		secondPizza.setDiameterAndPrice(10, 10.00);
 
 		AmountComparer.Values result = AmountComparer.comparePizzas(firstPizza, secondPizza);
-		assertEquals(result, AmountComparer.Values.FIRST);
+		assertEquals(result, AmountComparer.Values.SECOND); // -1 means that the first pizza is better value
 	}
 
 	@Test
@@ -51,7 +51,7 @@ class AmountComparerTest {
 		secondPizza.setDiameterAndPrice(15, 10.00);
 
 		AmountComparer.Values result = AmountComparer.comparePizzas(firstPizza, secondPizza);
-		assertEquals(result, AmountComparer.Values.EQUAL);
+		assertEquals(result, AmountComparer.Values.EQUAL); // 0 means that they are of equal value
 
 	}
 }

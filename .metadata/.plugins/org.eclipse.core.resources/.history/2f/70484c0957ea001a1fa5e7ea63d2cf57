@@ -30,10 +30,10 @@ class AmountComparer {
 		return betterValue;
 	}
 
-	public static int getPizzaDiameterFromUser(String pizzaSequence) {
+	public static int getPizzaDiameterFromUser(String pizza) {
 		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(System.in);
-		System.out.printf("Enter the diameter of the %s pizza please!: ", pizzaSequence);
+		System.out.printf("Enter the diameter of the %s pizza please!: ", pizza);
 		int diameter = sc.nextInt();
 		return diameter;
 	}
