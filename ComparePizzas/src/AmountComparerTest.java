@@ -9,22 +9,22 @@ class AmountComparerTest {
 		Pizza pizza = new Pizza();
 		assertTrue(pizza != null);
 
-		pizza.setDiameterAndPrice(10, 13.99);
+		pizza.setDiameter(10);
+		pizza.setPrice(13.99);
 
-		int pizzaDiameter = pizza.getDiameter();
-		double pizzaPrice = pizza.getPrice();
-
-		assertEquals(pizzaDiameter, 10);
-		assertEquals(pizzaPrice, 13.99);
+		assertEquals(pizza.getDiameter(), 10);
+		assertEquals(pizza.getPrice(), 13.99);
 	}
 
 	@Test
 	void test_comparePizzas_sameDiameterAndDifferentPrice_cheaperIsReturned() {
 		Pizza firstPizza = new Pizza();
-		firstPizza.setDiameterAndPrice(10, 11.99);
+		firstPizza.setDiameter(10);
+		firstPizza.setPrice(11.99);
 
 		Pizza secondPizza = new Pizza();
-		secondPizza.setDiameterAndPrice(10, 8.99);
+		secondPizza.setDiameter(10);
+		secondPizza.setPrice(8.99);
 
 		AmountComparer.Values result = AmountComparer.comparePizzas(firstPizza, secondPizza);
 		assertEquals(result, AmountComparer.Values.SECOND);
@@ -33,10 +33,12 @@ class AmountComparerTest {
 	@Test
 	void test_comparePizzas_differentDiameterAndSamePrice_biggerIsReturned() {
 		Pizza firstPizza = new Pizza();
-		firstPizza.setDiameterAndPrice(15, 10.00);
+		firstPizza.setDiameter(15);
+		firstPizza.setPrice(10.00);
 
 		Pizza secondPizza = new Pizza();
-		secondPizza.setDiameterAndPrice(10, 10.00);
+		secondPizza.setDiameter(10);
+		secondPizza.setPrice(10.00);
 
 		AmountComparer.Values result = AmountComparer.comparePizzas(firstPizza, secondPizza);
 		assertEquals(result, AmountComparer.Values.FIRST);
@@ -45,13 +47,30 @@ class AmountComparerTest {
 	@Test
 	void test_comparePizzas_sameDiameterAndSamePrice_equalValue() {
 		Pizza firstPizza = new Pizza();
-		firstPizza.setDiameterAndPrice(15, 10.00);
+		firstPizza.setDiameter(15);
+		firstPizza.setPrice(10.00);
 
 		Pizza secondPizza = new Pizza();
-		secondPizza.setDiameterAndPrice(15, 10.00);
+		secondPizza.setDiameter(15);
+		secondPizza.setPrice(10.00);
 
 		AmountComparer.Values result = AmountComparer.comparePizzas(firstPizza, secondPizza);
 		assertEquals(result, AmountComparer.Values.EQUAL);
+
+	}
+
+	@Test
+	void test_comparePizzas_differentDiameterAndDifferentPrice_betterValueIsReturned() {
+		Pizza firstPizza = new Pizza();
+		firstPizza.setDiameter(10);
+		firstPizza.setPrice(20);
+
+		Pizza secondPizza = new Pizza();
+		secondPizza.setDiameter(15);
+		secondPizza.setPrice(21);
+
+		AmountComparer.Values result = AmountComparer.comparePizzas(firstPizza, secondPizza);
+		assertEquals(result, AmountComparer.Values.SECOND);
 
 	}
 }
