@@ -1,9 +1,7 @@
 import java.util.Scanner;
 
 public class InputHandler {
-	public Scanner sc = new Scanner(System.in);
-
-	public Pizza createPizzaFromUserInput(String pizzaSequenceNum) {
+	public static Pizza createPizzaFromUserInput(String pizzaSequenceNum) {
 		Pizza pizza = new Pizza();
 		double pizzaDiameter = getPizzaDiameterFromUser(pizzaSequenceNum);
 		while (pizzaDiameter < 0) {
@@ -23,18 +21,25 @@ public class InputHandler {
 
 	}
 
-	private double getPizzaDiameterFromUser(String pizzaSequence) {
+	private static double getPizzaDiameterFromUser(String pizzaSequence) {
 		System.out.printf("Enter the diameter of the %s pizza please!: ", pizzaSequence);
+		@SuppressWarnings("resource")
+		Scanner sc = new Scanner(System.in);
+
 		if (sc.hasNextDouble()) {
 			double diameter = sc.nextDouble();
 			return diameter;
 		} else {
 			return getPizzaDiameterFromUser(pizzaSequence);
 		}
+
 	}
 
-	private double getPizzaPriceFromUser(String pizzaSequence) {
+	private static double getPizzaPriceFromUser(String pizzaSequence) {
 		System.out.printf("Enter the price of the %s pizza please!: ", pizzaSequence);
+		@SuppressWarnings("resource")
+		Scanner sc = new Scanner(System.in);
+
 		if (sc.hasNextDouble()) {
 			double price = sc.nextDouble();
 			return price;

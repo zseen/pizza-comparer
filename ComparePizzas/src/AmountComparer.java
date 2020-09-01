@@ -23,15 +23,13 @@ class AmountComparer {
 			betterValue = Values.SECOND;
 		} else {
 			betterValue = Values.EQUAL;
-
 		}
 		return betterValue;
 	}
 
 	public static void main(String[] args) {
-		InputHandler ih = new InputHandler();
-		Pizza firstPizza = ih.createPizzaFromUserInput("first");
-		Pizza secondPizza = ih.createPizzaFromUserInput("second");
+		Pizza firstPizza = InputHandler.createPizzaFromUserInput("first");
+		Pizza secondPizza = InputHandler.createPizzaFromUserInput("second");
 
 		Values betterValuePizzaSequence = comparePizzas(firstPizza, secondPizza);
 		System.out.println(betterValuePizzaSequence.getBetterValueMessage());
