@@ -23,7 +23,7 @@ class AmountComparer {
 			betterValue = Values.SECOND;
 		} else {
 			betterValue = Values.EQUAL;
-			;
+
 		}
 		return betterValue;
 	}
