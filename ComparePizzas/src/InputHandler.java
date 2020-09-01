@@ -5,7 +5,7 @@ public class InputHandler {
 
 	public Pizza createPizzaFromUserInput(String pizzaSequenceNum) {
 		Pizza pizza = new Pizza();
-		int pizzaDiameter = getPizzaDiameterFromUser(pizzaSequenceNum);
+		double pizzaDiameter = getPizzaDiameterFromUser(pizzaSequenceNum);
 		while (pizzaDiameter < 0) {
 			System.out.printf("The diameter of a pizza cannot be smaller than 0! ");
 			pizzaDiameter = getPizzaDiameterFromUser(pizzaSequenceNum);
@@ -23,10 +23,10 @@ public class InputHandler {
 
 	}
 
-	private int getPizzaDiameterFromUser(String pizzaSequence) {
+	private double getPizzaDiameterFromUser(String pizzaSequence) {
 		System.out.printf("Enter the diameter of the %s pizza please!: ", pizzaSequence);
-		if (sc.hasNextInt()) {
-			int diameter = sc.nextInt();
+		if (sc.hasNextDouble()) {
+			double diameter = sc.nextDouble();
 			return diameter;
 		} else {
 			return getPizzaDiameterFromUser(pizzaSequence);
@@ -36,7 +36,7 @@ public class InputHandler {
 	private double getPizzaPriceFromUser(String pizzaSequence) {
 		System.out.printf("Enter the price of the %s pizza please!: ", pizzaSequence);
 		if (sc.hasNextDouble()) {
-			double price = sc.nextInt();
+			double price = sc.nextDouble();
 			return price;
 		} else {
 			return getPizzaPriceFromUser(pizzaSequence);

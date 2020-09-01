@@ -1,9 +1,9 @@
 public class Pizza {
 
-	private int diameter;
+	private double diameter;
 	private double price;
 
-	public void setDiameter(int diameter) {
+	public void setDiameter(double diameter) {
 		this.diameter = diameter;
 	}
 
@@ -11,7 +11,7 @@ public class Pizza {
 		this.price = price;
 	}
 
-	public int getDiameter() {
+	public double getDiameter() {
 		return this.diameter;
 	}
 
