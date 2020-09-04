@@ -27,7 +27,7 @@ public class InputHandler {
 		System.out.printf("Enter the %s of the %s pizza please!: ", attributeName, pizzaSequence);
 
 		while (!sc.hasNextDouble()) {
-			System.out.printf("The %s should be a number! Enter the diameter of the %s pizza please!: ", attributeName, pizzaSequence);
+			System.out.printf("The %s should be a number! Enter the %s of the %s pizza please!: ", attributeName, attributeName, pizzaSequence);
 			sc.next();
 		}
 
