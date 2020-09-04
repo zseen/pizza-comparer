@@ -26,8 +26,8 @@ class AmountComparerTest {
 		secondPizza.setDiameter(10);
 		secondPizza.setPrice(8.99);
 
-		AmountComparer.Values result = AmountComparer.comparePizzas(firstPizza, secondPizza);
-		assertEquals(result, AmountComparer.Values.SECOND);
+		AmountComparer.ComparisonResult result = AmountComparer.comparePizzas(firstPizza, secondPizza);
+		assertEquals(result, AmountComparer.ComparisonResult.SECOND_IS_BETTER);
 	}
 
 	@Test
@@ -40,8 +40,8 @@ class AmountComparerTest {
 		secondPizza.setDiameter(10);
 		secondPizza.setPrice(10.00);
 
-		AmountComparer.Values result = AmountComparer.comparePizzas(firstPizza, secondPizza);
-		assertEquals(result, AmountComparer.Values.FIRST);
+		AmountComparer.ComparisonResult result = AmountComparer.comparePizzas(firstPizza, secondPizza);
+		assertEquals(result, AmountComparer.ComparisonResult.FIRST_IS_BETTER);
 	}
 
 	@Test
@@ -54,8 +54,8 @@ class AmountComparerTest {
 		secondPizza.setDiameter(15);
 		secondPizza.setPrice(10.00);
 
-		AmountComparer.Values result = AmountComparer.comparePizzas(firstPizza, secondPizza);
-		assertEquals(result, AmountComparer.Values.EQUAL);
+		AmountComparer.ComparisonResult result = AmountComparer.comparePizzas(firstPizza, secondPizza);
+		assertEquals(result, AmountComparer.ComparisonResult.EQUAL_VALUES);
 
 	}
 
@@ -69,8 +69,8 @@ class AmountComparerTest {
 		secondPizza.setDiameter(15);
 		secondPizza.setPrice(21);
 
-		AmountComparer.Values result = AmountComparer.comparePizzas(firstPizza, secondPizza);
-		assertEquals(result, AmountComparer.Values.SECOND);
+		AmountComparer.ComparisonResult result = AmountComparer.comparePizzas(firstPizza, secondPizza);
+		assertEquals(result, AmountComparer.ComparisonResult.SECOND_IS_BETTER);
 
 	}
 }

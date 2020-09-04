@@ -1,18 +1,20 @@
 import java.util.Scanner;
 
 public class InputHandler {
-	public static Pizza createPizzaFromUserInput(String pizzaSequenceNum) {
+	public Scanner sc = new Scanner(System.in);
+
+	public Pizza createPizzaFromUserInput(String pizzaSequenceNum) {
 		Pizza pizza = new Pizza();
-		double pizzaDiameter = getPizzaDiameterFromUser(pizzaSequenceNum);
+		double pizzaDiameter = getPizzaAttributeFromUser(pizzaSequenceNum, "diameter");
 		while (pizzaDiameter < 0) {
 			System.out.printf("The diameter of a pizza cannot be smaller than 0! ");
-			pizzaDiameter = getPizzaDiameterFromUser(pizzaSequenceNum);
+			pizzaDiameter = getPizzaAttributeFromUser(pizzaSequenceNum, "diameter");
 		}
 
-		double pizzaPrice = getPizzaPriceFromUser(pizzaSequenceNum);
+		double pizzaPrice = getPizzaAttributeFromUser(pizzaSequenceNum, "price");
 		while (pizzaPrice < 0) {
 			System.out.printf("The price of a pizza cannot be less than 0! ");
-			pizzaPrice = getPizzaPriceFromUser(pizzaSequenceNum);
+			pizzaPrice = getPizzaAttributeFromUser(pizzaSequenceNum, "price");
 		}
 
 		pizza.setDiameter(pizzaDiameter);
@@ -21,31 +23,17 @@ public class InputHandler {
 
 	}
 
-	private static double getPizzaDiameterFromUser(String pizzaSequence) {
-		System.out.printf("Enter the diameter of the %s pizza please!: ", pizzaSequence);
-		@SuppressWarnings("resource")
-		Scanner sc = new Scanner(System.in);
+	private double getPizzaAttributeFromUser(String pizzaSequence, String attributeName) {
+		System.out.printf("Enter the %s of the %s pizza please!: ", attributeName, pizzaSequence);
 
-		if (sc.hasNextDouble()) {
-			double diameter = sc.nextDouble();
-			return diameter;
-		} else {
-			return getPizzaDiameterFromUser(pizzaSequence);
+		while (!sc.hasNextDouble()) {
+			System.out.printf("The %s should be a number! Enter the diameter of the %s pizza please!: ", attributeName, pizzaSequence);
+			sc.next();
 		}
 
-	}
+		double attribute = sc.nextDouble();
+		return attribute;
 
-	private static double getPizzaPriceFromUser(String pizzaSequence) {
-		System.out.printf("Enter the price of the %s pizza please!: ", pizzaSequence);
-		@SuppressWarnings("resource")
-		Scanner sc = new Scanner(System.in);
-
-		if (sc.hasNextDouble()) {
-			double price = sc.nextDouble();
-			return price;
-		} else {
-			return getPizzaPriceFromUser(pizzaSequence);
-		}
 	}
 
 }

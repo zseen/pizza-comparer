@@ -20,14 +20,11 @@ public class Pizza {
 	}
 
 	public double getArea() {
-		return this.calculateArea();
+		return (this.diameter / 2) * (this.diameter / 2) * Math.PI;
 	}
 
 	public double getPricePerUnit() {
 		return this.price / this.getArea();
 	}
 
-	private double calculateArea() {
-		return (this.diameter / 2) * (this.diameter / 2) * Math.PI;
-	}
 }

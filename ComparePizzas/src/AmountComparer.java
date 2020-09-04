@@ -1,11 +1,12 @@
 class AmountComparer {
-	public enum Values {
-		FIRST("The first pizza is better value"), EQUAL("They are equal value - choose the one that you prefer!"),
-		SECOND("The second pizza is better value");
+	public enum ComparisonResult {
+		FIRST_IS_BETTER("The first pizza is better value"),
+		EQUAL_VALUES("They are equal value - choose the one that you prefer!"),
+		SECOND_IS_BETTER("The second pizza is better value");
 
 		private final String messageToUser;
 
-		Values(String messageToUser) {
+		ComparisonResult(String messageToUser) {
 			this.messageToUser = messageToUser;
 		}
 
@@ -15,24 +16,25 @@ class AmountComparer {
 
 	}
 
-	public static Values comparePizzas(Pizza firstPizza, Pizza secondPizza) {
-		Values betterValue;
+	public static ComparisonResult comparePizzas(Pizza firstPizza, Pizza secondPizza) {
+		ComparisonResult betterValue;
 		if (firstPizza.getPricePerUnit() < secondPizza.getPricePerUnit()) {
-			betterValue = Values.FIRST;
+			betterValue = ComparisonResult.FIRST_IS_BETTER;
 		} else if (secondPizza.getPricePerUnit() < firstPizza.getPricePerUnit()) {
-			betterValue = Values.SECOND;
+			betterValue = ComparisonResult.SECOND_IS_BETTER;
 		} else {
-			betterValue = Values.EQUAL;
+			betterValue = ComparisonResult.EQUAL_VALUES;
 		}
 		return betterValue;
 	}
 
 	public static void main(String[] args) {
-		Pizza firstPizza = InputHandler.createPizzaFromUserInput("first");
-		Pizza secondPizza = InputHandler.createPizzaFromUserInput("second");
+		InputHandler ih = new InputHandler();
+		Pizza firstPizza = ih.createPizzaFromUserInput("first");
+		Pizza secondPizza = ih.createPizzaFromUserInput("second");
 
-		Values betterValuePizzaSequence = comparePizzas(firstPizza, secondPizza);
-		System.out.println(betterValuePizzaSequence.getBetterValueMessage());
+		ComparisonResult betterPizzaComparisonResult = comparePizzas(firstPizza, secondPizza);
+		System.out.println(betterPizzaComparisonResult.getBetterValueMessage());
 
 	}
 
