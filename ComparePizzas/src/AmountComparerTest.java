@@ -26,8 +26,8 @@ class AmountComparerTest {
 		secondPizza.setDiameter(10);
 		secondPizza.setPrice(8.99);
 
-		AmountComparer.ComparisonResult result = AmountComparer.comparePizzas(firstPizza, secondPizza);
-		assertEquals(result, AmountComparer.ComparisonResult.SECOND_IS_BETTER);
+		PizzaValueComparer.ComparisonResult result = PizzaValueComparer.comparePizzas(firstPizza, secondPizza);
+		assertEquals(result, PizzaValueComparer.ComparisonResult.SECOND_IS_BETTER);
 	}
 
 	@Test
@@ -40,8 +40,8 @@ class AmountComparerTest {
 		secondPizza.setDiameter(10);
 		secondPizza.setPrice(10.00);
 
-		AmountComparer.ComparisonResult result = AmountComparer.comparePizzas(firstPizza, secondPizza);
-		assertEquals(result, AmountComparer.ComparisonResult.FIRST_IS_BETTER);
+		PizzaValueComparer.ComparisonResult result = PizzaValueComparer.comparePizzas(firstPizza, secondPizza);
+		assertEquals(result, PizzaValueComparer.ComparisonResult.FIRST_IS_BETTER);
 	}
 
 	@Test
@@ -54,8 +54,8 @@ class AmountComparerTest {
 		secondPizza.setDiameter(15);
 		secondPizza.setPrice(10.00);
 
-		AmountComparer.ComparisonResult result = AmountComparer.comparePizzas(firstPizza, secondPizza);
-		assertEquals(result, AmountComparer.ComparisonResult.EQUAL_VALUES);
+		PizzaValueComparer.ComparisonResult result = PizzaValueComparer.comparePizzas(firstPizza, secondPizza);
+		assertEquals(result, PizzaValueComparer.ComparisonResult.EQUAL_VALUES);
 
 	}
 
@@ -69,8 +69,23 @@ class AmountComparerTest {
 		secondPizza.setDiameter(15);
 		secondPizza.setPrice(21);
 
-		AmountComparer.ComparisonResult result = AmountComparer.comparePizzas(firstPizza, secondPizza);
-		assertEquals(result, AmountComparer.ComparisonResult.SECOND_IS_BETTER);
+		PizzaValueComparer.ComparisonResult result = PizzaValueComparer.comparePizzas(firstPizza, secondPizza);
+		assertEquals(result, PizzaValueComparer.ComparisonResult.SECOND_IS_BETTER);
+
+	}
+
+	@Test
+	void test_comparePizzas_differentDiameterAndDifferentPrice_equalValue() {
+		Pizza firstPizza = new Pizza();
+		firstPizza.setDiameter(2);
+		firstPizza.setPrice(2 * Math.PI);
+
+		Pizza secondPizza = new Pizza();
+		secondPizza.setDiameter(4);
+		secondPizza.setPrice(8 * Math.PI);
+
+		PizzaValueComparer.ComparisonResult result = PizzaValueComparer.comparePizzas(firstPizza, secondPizza);
+		assertEquals(result, PizzaValueComparer.ComparisonResult.EQUAL_VALUES);
 
 	}
 }

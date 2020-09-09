@@ -1,4 +1,4 @@
-class AmountComparer {
+class PizzaValueComparer {
 	public enum ComparisonResult {
 		FIRST_IS_BETTER("The first pizza is better value"),
 		EQUAL_VALUES("They are equal value - choose the one that you prefer!"),
@@ -35,7 +35,6 @@ class AmountComparer {
 
 		ComparisonResult betterPizzaComparisonResult = comparePizzas(firstPizza, secondPizza);
 		System.out.println(betterPizzaComparisonResult.getBetterValueMessage());
-
 	}
 
 }
