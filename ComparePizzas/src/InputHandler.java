@@ -29,11 +29,10 @@ public class InputHandler {
 				continue;
 			}
 
-			double myInp = sc.nextDouble();
-			if (myInp < 0) {
+			double attribute = sc.nextDouble();
+			if (attribute < 0) {
 				System.out.printf("The %s should be a number greater than 0!\n", attributeName);
 			} else {
-				double attribute = myInp;
 				return attribute;
 			}
 
