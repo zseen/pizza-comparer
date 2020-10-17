@@ -2,10 +2,9 @@ import java.util.Scanner;
 
 public class InputHandler {
 	public enum UnitOfMeasurement {
-		CM("cm"),
-		INCH("inch");
+		CM("cm"), INCH("inch");
 
-		private final String measurement;
+		final String measurement;
 
 		UnitOfMeasurement(String measurement) {
 			this.measurement = measurement;
@@ -19,17 +18,54 @@ public class InputHandler {
 
 	public Scanner sc = new Scanner(System.in);
 
+	public String unitOfMeasure = null;
+	public Double diam = null;
+	public boolean isComplete = false;
+
+	public void getDiameterAndUnitOfMeasurementFromUser(String pizzaSequenceNum) {
+		this.diam = null;
+		this.unitOfMeasure = null;
+		this.isComplete = false;
+
+		while (!this.isComplete) {
+
+			System.out.printf("Enter the diameter of the %s pizza please:  ", pizzaSequenceNum);
+			String word = sc.next();
+
+			while (this.diam == null) {
+				try {
+					this.diam = Double.parseDouble(word);
+				} catch (Exception e) {
+					System.out.println("Enter the diameter properly please:  ");
+					word = sc.next();
+				}
+			}
+
+			System.out.printf("Enter the UoMof the %s pizza please:  ", pizzaSequenceNum);
+			String otherWord = sc.next();
+			this.unitOfMeasure = otherWord;
+
+			while (!this.unitOfMeasure.equals(UnitOfMeasurement.CM.measurement)
+					&& !this.unitOfMeasure.equals(UnitOfMeasurement.INCH.measurement)) {
+				System.out.println("Enter the uom properly please:  ");
+				this.unitOfMeasure = sc.next();
+			}
+
+			if (this.diam != null && this.unitOfMeasure != null) {
+				this.isComplete = true;
+			}
+		}
+	}
+
 	public Pizza createPizzaFromUserInput(String pizzaSequenceNum) {
 		Pizza pizza = new Pizza();
-		double pizzaDiameter = getPizzaAttributeFromUser(pizzaSequenceNum, "diameter");
+		this.getDiameterAndUnitOfMeasurementFromUser(pizzaSequenceNum);
+		double pizzaDiameter = this.diam;
 		
-		String diameterUnitOfMeasurement = getDiameterUnitOfMeasurementFromUser();
-		//System.out.printf("MEASUREMENT: %s", diameterUnitOfMeasurement);
-
 		double pizzaPrice = getPizzaAttributeFromUser(pizzaSequenceNum, "price");
 		
-
 		pizza.setDiameter(pizzaDiameter);
+		pizza.setDiameterUnitOfMeasurement(this.unitOfMeasure);
 		pizza.setPrice(pizzaPrice);
 		return pizza;
 
@@ -54,37 +90,6 @@ public class InputHandler {
 
 		}
 
-	}
-	
-	private String getDiameterUnitOfMeasurementFromUser() {
-		//System.out.printf("in getDiameterUnit() ");
-	
-		
-		String unitOfMeasurement = null;
-		//System.out.printf("so it got here");
-		
-		while (unitOfMeasurement == null) {
-			//System.out.printf("uom: %s", unitOfMeasurement);
-			System.out.printf("What unit of measurement is your pizza? Inch `inch` or `cm`?: ");
-			unitOfMeasurement = sc.next();
-			
-		}
-		
-		//System.out.printf("In `getDiameterUnitOfMeasurementFromUser`, unitOFMeasurement: %s \n", unitOfMeasurement);
-		//System.out.printf("enum value cm: %s \n", UnitOfMeasurement.CM.measurement);
-		//System.out.print(UnitOfMeasurement.CM.measurement.equals(unitOfMeasurement) );
-		
-		
-		while (!unitOfMeasurement.equals(UnitOfMeasurement.CM.measurement) && !unitOfMeasurement.equals(UnitOfMeasurement.INCH.measurement)) {
-			//System.out.printf("In while loop, unitOFMeasurement: %s \n", unitOfMeasurement);
-			//System.out.printf("The diameter should be `cm` or `inch`!: ");
-			sc.next();
-
-			
-		}
-		return unitOfMeasurement;
-		
-		
 	}
 
 }

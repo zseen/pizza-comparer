@@ -30,11 +30,13 @@ class PizzaValueComparer {
 
 	public static void main(String[] args) {
 		InputHandler ih = new InputHandler();
+
 		Pizza firstPizza = ih.createPizzaFromUserInput("first");
 		Pizza secondPizza = ih.createPizzaFromUserInput("second");
 
 		ComparisonResult betterPizzaComparisonResult = comparePizzas(firstPizza, secondPizza);
 		System.out.println(betterPizzaComparisonResult.getBetterValueMessage());
+
 	}
 
 }
