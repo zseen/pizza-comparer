@@ -3,7 +3,7 @@ public class Pizza {
 
 	private double diameter;
 	private double price;
-	private String diameterUnitOfMeasurement;
+	public String diameterUnitOfMeasurement;
 
 	public void setDiameter(double diameter) {
 		this.diameter = diameter;
@@ -31,13 +31,13 @@ public class Pizza {
 
 	public double getPricePerUnit() {
 		if (this.diameterUnitOfMeasurement.equals(InputHandler.UnitOfMeasurement.CM.measurement)) {
-			System.out.println(this.price / this.getArea());
 			return this.price / this.getArea();
 		}
 
-		else {
-			System.out.println(this.price / this.getArea() / (2.54 * 2.54));
+		else if (this.diameterUnitOfMeasurement.equals(InputHandler.UnitOfMeasurement.INCH.measurement)) {
 			return this.price / this.getArea() / (2.54 * 2.54);
 		}
+
+		return -1;
 	}
 }
