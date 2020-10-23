@@ -38,9 +38,9 @@ public class InputHandler {
 				}
 			}
 
-			System.out.printf("Enter the unit of measurement (cm or inch) for the %s pizza please:  ", pizzaSequenceNum);
-			String otherWord = sc.next();
-			this.unitOfMeasurement = otherWord;
+			System.out.printf("Enter the unit of measurement (cm or inch) for the %s pizza please:  ",
+					pizzaSequenceNum);
+			this.unitOfMeasurement = sc.next();
 
 			while (!this.unitOfMeasurement.equals(UnitOfMeasurement.CM.measurement)
 					&& !this.unitOfMeasurement.equals(UnitOfMeasurement.INCH.measurement)) {
@@ -58,9 +58,8 @@ public class InputHandler {
 		Pizza pizza = new Pizza();
 		this.getDiameterData(pizzaSequenceNum);
 		double pizzaDiameter = this.diameter;
-		
 		double pizzaPrice = getPizzaAttributeFromUser(pizzaSequenceNum, "price");
-		
+
 		pizza.setDiameter(pizzaDiameter);
 		pizza.setDiameterUnitOfMeasurement(this.unitOfMeasurement);
 		pizza.setPrice(pizzaPrice);
