@@ -16,53 +16,51 @@ public class InputHandler {
 	}
 
 	public Scanner sc = new Scanner(System.in);
-	public String unitOfMeasurement = null;
+	public UnitOfMeasurement unitOfMeasurement = null;
 	public Double diameter = null;
-	public boolean areDiameterDataComplete = false;
 
-	public void getDiameterData(String pizzaSequenceNum) {
+	public void getDiameterDataFromUser(String pizzaSequenceNumWord) {
 		this.diameter = null;
 		this.unitOfMeasurement = null;
-		this.areDiameterDataComplete = false;
 
-		while (!this.areDiameterDataComplete) {
-			System.out.printf("Enter the diameter of the %s pizza please:  ", pizzaSequenceNum);
-			String word = sc.next();
+		while (this.diameter == null && this.unitOfMeasurement == null) {
 
-			while (this.diameter == null) {
+			while (this.diameter == null || this.diameter <= 0) {
 				try {
+					System.out.printf("Enter the diameter of the %s pizza please:  ", pizzaSequenceNumWord);
+					String word = sc.next();
 					this.diameter = Double.parseDouble(word);
-				} catch (Exception e) {
-					System.out.println("Enter the diameter properly please:  ");
-					word = sc.next();
+					if (this.diameter <= 0) {
+						System.out.println("The diameter should be greater than 0!");
+					}
+				} catch (NumberFormatException e) {
+					System.out.println(e);
 				}
 			}
 
-			System.out.printf("Enter the unit of measurement (cm or inch) for the %s pizza please:  ",
-					pizzaSequenceNum);
-			this.unitOfMeasurement = sc.next();
+			String potentialUoM = null;
+			while (potentialUoM == null || !potentialUoM.equals(UnitOfMeasurement.CM.measurement)
+					&& !potentialUoM.equals(UnitOfMeasurement.INCH.measurement)) {
+				System.out.printf("Enter the unit of measurement (cm or inch) for the %s pizza please:  ",
+						pizzaSequenceNumWord);
 
-			while (!this.unitOfMeasurement.equals(UnitOfMeasurement.CM.measurement)
-					&& !this.unitOfMeasurement.equals(UnitOfMeasurement.INCH.measurement)) {
-				System.out.println("Enter the unit of measurement (cm or inch) properly please:  ");
-				this.unitOfMeasurement = sc.next();
+				potentialUoM = sc.next();
+
+				if (potentialUoM.equals(UnitOfMeasurement.CM.measurement)) {
+					this.unitOfMeasurement = UnitOfMeasurement.CM;
+				} else if (potentialUoM.equals(UnitOfMeasurement.INCH.measurement)) {
+					this.unitOfMeasurement = UnitOfMeasurement.INCH;
+				}
 			}
 
-			if (this.diameter != null && this.unitOfMeasurement != null) {
-				this.areDiameterDataComplete = true;
-			}
 		}
 	}
 
 	public Pizza createPizzaFromUserInput(String pizzaSequenceNum) {
-		Pizza pizza = new Pizza();
-		this.getDiameterData(pizzaSequenceNum);
-		double pizzaDiameter = this.diameter;
+		this.getDiameterDataFromUser(pizzaSequenceNum);
 		double pizzaPrice = getPizzaAttributeFromUser(pizzaSequenceNum, "price");
 
-		pizza.setDiameter(pizzaDiameter);
-		pizza.setDiameterUnitOfMeasurement(this.unitOfMeasurement);
-		pizza.setPrice(pizzaPrice);
+		Pizza pizza = new Pizza(this.diameter, this.unitOfMeasurement, pizzaPrice);
 		return pizza;
 
 	}

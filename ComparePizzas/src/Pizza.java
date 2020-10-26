@@ -1,19 +1,12 @@
-
 public class Pizza {
 
 	private double diameter;
+	public InputHandler.UnitOfMeasurement diameterUnitOfMeasurement;
 	private double price;
-	public String diameterUnitOfMeasurement;
 
-	public void setDiameter(double diameter) {
+	public Pizza(double diameter, InputHandler.UnitOfMeasurement diameterUnitOfMeasurement, double price) {
 		this.diameter = diameter;
-	}
-
-	public void setDiameterUnitOfMeasurement(String unitOfMeasurement) {
-		this.diameterUnitOfMeasurement = unitOfMeasurement;
-	}
-
-	public void setPrice(double price) {
+		this.diameterUnitOfMeasurement = diameterUnitOfMeasurement;
 		this.price = price;
 	}
 
@@ -29,15 +22,20 @@ public class Pizza {
 		return (this.diameter / 2) * (this.diameter / 2) * Math.PI;
 	}
 
-	public double getPricePerUnit() {
-		if (this.diameterUnitOfMeasurement.equals(InputHandler.UnitOfMeasurement.CM.measurement)) {
-			return this.price / this.getArea();
+	public double getPricePerUnit() throws RuntimeException {
+		double pricePerUnitForCM = this.price / this.getArea();
+
+		if (this.diameterUnitOfMeasurement.equals(InputHandler.UnitOfMeasurement.CM)) {
+			return pricePerUnitForCM;
 		}
 
-		else if (this.diameterUnitOfMeasurement.equals(InputHandler.UnitOfMeasurement.INCH.measurement)) {
-			return this.price / this.getArea() / (2.54 * 2.54);
+		else if (this.diameterUnitOfMeasurement.equals(InputHandler.UnitOfMeasurement.INCH)) {
+			return pricePerUnitForCM / (2.54 * 2.54);
 		}
 
-		return -1;
+		else {
+			throw new RuntimeException("Problem with unit of measurement.");
+		}
+
 	}
 }
