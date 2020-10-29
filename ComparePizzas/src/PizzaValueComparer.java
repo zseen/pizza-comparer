@@ -16,23 +16,18 @@ class PizzaValueComparer {
 
 	}
 
-	public static ComparisonResult comparePizzas(Pizza firstPizza, Pizza secondPizza) throws Exception {
+	public static ComparisonResult comparePizzas(Pizza firstPizza, Pizza secondPizza) throws RuntimeException {
 
-		try {
-			ComparisonResult betterValue;
+		ComparisonResult betterValue;
 
-			if (firstPizza.getPricePerUnit() < secondPizza.getPricePerUnit()) {
-				betterValue = ComparisonResult.FIRST_IS_BETTER;
-			} else if (secondPizza.getPricePerUnit() < firstPizza.getPricePerUnit()) {
-				betterValue = ComparisonResult.SECOND_IS_BETTER;
-			} else {
-				betterValue = ComparisonResult.EQUAL_VALUES;
-			}
-			return betterValue;
-		} catch (RuntimeException e) {
-			throw new RuntimeException("Problem with unit of measurement.");
-
+		if (firstPizza.getPricePerUnit() < secondPizza.getPricePerUnit()) {
+			betterValue = ComparisonResult.FIRST_IS_BETTER;
+		} else if (secondPizza.getPricePerUnit() < firstPizza.getPricePerUnit()) {
+			betterValue = ComparisonResult.SECOND_IS_BETTER;
+		} else {
+			betterValue = ComparisonResult.EQUAL_VALUES;
 		}
+		return betterValue;
 
 	}
 
@@ -47,7 +42,7 @@ class PizzaValueComparer {
 			betterPizzaComparisonResult = comparePizzas(firstPizza, secondPizza);
 			System.out.println(betterPizzaComparisonResult.getBetterValueMessage());
 		} catch (Exception e) {
-			System.out.printf(e.getMessage(), "Something went wrong. Try again please.");
+			System.out.printf("Exception: ", e);
 		}
 
 	}

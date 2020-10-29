@@ -1,66 +1,49 @@
 import java.util.Scanner;
 
 public class InputHandler {
-	public enum UnitOfMeasurement {
-		CM("cm"), INCH("inch");
-
-		final String measurement;
-
-		UnitOfMeasurement(String measurement) {
-			this.measurement = measurement;
-		}
-
-		public String geUnitOfMeasurementName() {
-			return this.measurement;
-		}
-	}
 
 	public Scanner sc = new Scanner(System.in);
-	public UnitOfMeasurement unitOfMeasurement = null;
+	public Pizza.UnitOfMeasurement unitOfMeasurement = null;
 	public Double diameter = null;
 
 	public void getDiameterDataFromUser(String pizzaSequenceNumWord) {
 		this.diameter = null;
 		this.unitOfMeasurement = null;
 
-		while (this.diameter == null && this.unitOfMeasurement == null) {
-
-			while (this.diameter == null || this.diameter <= 0) {
-				try {
-					System.out.printf("Enter the diameter of the %s pizza please:  ", pizzaSequenceNumWord);
-					String word = sc.next();
-					this.diameter = Double.parseDouble(word);
-					if (this.diameter <= 0) {
-						System.out.println("The diameter should be greater than 0!");
-					}
-				} catch (NumberFormatException e) {
-					System.out.println(e);
+		while (this.diameter == null || this.diameter <= 0) {
+			try {
+				System.out.printf("Enter the diameter of the %s pizza please:  ", pizzaSequenceNumWord);
+				String word = sc.next();
+				this.diameter = Double.parseDouble(word);
+				if (this.diameter <= 0) {
+					System.out.println("The diameter should be greater than 0!");
 				}
+			} catch (NumberFormatException e) {
+				System.out.printf("The diameter should be a number!");
 			}
+		}
 
-			String potentialUoM = null;
-			while (potentialUoM == null || !potentialUoM.equals(UnitOfMeasurement.CM.measurement)
-					&& !potentialUoM.equals(UnitOfMeasurement.INCH.measurement)) {
-				System.out.printf("Enter the unit of measurement (cm or inch) for the %s pizza please:  ",
-						pizzaSequenceNumWord);
-
-				potentialUoM = sc.next();
-
-				if (potentialUoM.equals(UnitOfMeasurement.CM.measurement)) {
-					this.unitOfMeasurement = UnitOfMeasurement.CM;
-				} else if (potentialUoM.equals(UnitOfMeasurement.INCH.measurement)) {
-					this.unitOfMeasurement = UnitOfMeasurement.INCH;
-				}
-			}
+		String potentialUnitOfMeasurement = null;
+		while (!isUnitOfMeasurementValid(potentialUnitOfMeasurement)) {
+			System.out.printf("Enter the unit of measurement (cm or inch) for the %s pizza please:  ",
+					pizzaSequenceNumWord);
+			potentialUnitOfMeasurement = sc.next();
 
 		}
+
+		try {
+			convertUnitOfMeasurementStringToEnum(potentialUnitOfMeasurement);
+		} catch (Exception e) {
+			System.out.printf("Invalid unit of measurement.");
+		}
+
 	}
 
 	public Pizza createPizzaFromUserInput(String pizzaSequenceNum) {
 		this.getDiameterDataFromUser(pizzaSequenceNum);
 		double pizzaPrice = getPizzaAttributeFromUser(pizzaSequenceNum, "price");
 
-		Pizza pizza = new Pizza(this.diameter, this.unitOfMeasurement, pizzaPrice);
+		Pizza pizza = new Pizza(this.diameter, pizzaPrice, this.unitOfMeasurement);
 		return pizza;
 
 	}
@@ -81,6 +64,28 @@ public class InputHandler {
 			} else {
 				return attribute;
 			}
+		}
+	}
+
+	private boolean isUnitOfMeasurementValid(String unitOfMeasurement) {
+		if (unitOfMeasurement == null) {
+			return false;
+		}
+
+		if (unitOfMeasurement.equals(Pizza.UnitOfMeasurement.CM.measurement)
+				|| unitOfMeasurement.equals(Pizza.UnitOfMeasurement.INCH.measurement)) {
+			return true;
+		}
+
+		return false;
+
+	}
+
+	private void convertUnitOfMeasurementStringToEnum(String unitOfMeasurement) throws RuntimeException {
+		if (unitOfMeasurement.equals(Pizza.UnitOfMeasurement.CM.measurement)) {
+			this.unitOfMeasurement = Pizza.UnitOfMeasurement.CM;
+		} else if (unitOfMeasurement.equals(Pizza.UnitOfMeasurement.INCH.measurement)) {
+			this.unitOfMeasurement = Pizza.UnitOfMeasurement.INCH;
 		}
 	}
 }

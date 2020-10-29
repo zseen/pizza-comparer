@@ -1,13 +1,28 @@
 public class Pizza {
 
 	private double diameter;
-	public InputHandler.UnitOfMeasurement diameterUnitOfMeasurement;
+	public UnitOfMeasurement diameterUnitOfMeasurement;
 	private double price;
 
-	public Pizza(double diameter, InputHandler.UnitOfMeasurement diameterUnitOfMeasurement, double price) {
+	public enum UnitOfMeasurement {
+		CM("cm"), INCH("inch");
+
+		final String measurement;
+
+		UnitOfMeasurement(String measurement) {
+			this.measurement = measurement;
+		}
+
+		public String geUnitOfMeasurementName() {
+			return this.measurement;
+		}
+	}
+
+	public Pizza(double diameter, double price, UnitOfMeasurement diameterUnitOfMeasurement) {
 		this.diameter = diameter;
-		this.diameterUnitOfMeasurement = diameterUnitOfMeasurement;
 		this.price = price;
+		this.diameterUnitOfMeasurement = diameterUnitOfMeasurement;
+
 	}
 
 	public double getDiameter() {
@@ -24,13 +39,14 @@ public class Pizza {
 
 	public double getPricePerUnit() throws RuntimeException {
 		double pricePerUnitForCM = this.price / this.getArea();
+		double inch = 2.54;
 
-		if (this.diameterUnitOfMeasurement.equals(InputHandler.UnitOfMeasurement.CM)) {
+		if (this.diameterUnitOfMeasurement.equals(UnitOfMeasurement.CM)) {
 			return pricePerUnitForCM;
 		}
 
-		else if (this.diameterUnitOfMeasurement.equals(InputHandler.UnitOfMeasurement.INCH)) {
-			return pricePerUnitForCM / (2.54 * 2.54);
+		else if (this.diameterUnitOfMeasurement.equals(UnitOfMeasurement.INCH)) {
+			return pricePerUnitForCM / (inch * inch);
 		}
 
 		else {
