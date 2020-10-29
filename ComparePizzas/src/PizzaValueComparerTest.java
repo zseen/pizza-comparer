@@ -38,7 +38,7 @@ class PizzaValueComparerTest {
 	}
 
 	@Test
-	void test_comparePizzas_sameDiameterAndSamePrice_equalValue() throws Exception {
+	void test_comparePizzas_sameDiameterAndSamePrice_equalValue() throws RuntimeException {
 		Pizza firstPizza = new Pizza(15, 10.00, cm);
 		Pizza secondPizza = new Pizza(15, 10.00, cm);
 
