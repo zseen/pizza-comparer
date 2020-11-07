@@ -16,8 +16,9 @@ class PizzaValueComparer {
 
 	}
 
-	public static ComparisonResult comparePizzas(Pizza firstPizza, Pizza secondPizza) {
+	public static ComparisonResult comparePizzas(Pizza firstPizza, Pizza secondPizza) throws RuntimeException {
 		ComparisonResult betterValue;
+
 		if (firstPizza.getPricePerUnit() < secondPizza.getPricePerUnit()) {
 			betterValue = ComparisonResult.FIRST_IS_BETTER;
 		} else if (secondPizza.getPricePerUnit() < firstPizza.getPricePerUnit()) {
@@ -26,15 +27,23 @@ class PizzaValueComparer {
 			betterValue = ComparisonResult.EQUAL_VALUES;
 		}
 		return betterValue;
+
 	}
 
 	public static void main(String[] args) {
 		InputHandler ih = new InputHandler();
+
 		Pizza firstPizza = ih.createPizzaFromUserInput("first");
 		Pizza secondPizza = ih.createPizzaFromUserInput("second");
 
-		ComparisonResult betterPizzaComparisonResult = comparePizzas(firstPizza, secondPizza);
-		System.out.println(betterPizzaComparisonResult.getBetterValueMessage());
+		ComparisonResult betterPizzaComparisonResult;
+		try {
+			betterPizzaComparisonResult = comparePizzas(firstPizza, secondPizza);
+			System.out.println(betterPizzaComparisonResult.getBetterValueMessage());
+		} catch (Exception e) {
+			System.out.printf("Exception: ", e);
+		}
+
 	}
 
 }
