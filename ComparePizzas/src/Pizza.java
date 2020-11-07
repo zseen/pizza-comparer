@@ -2,6 +2,7 @@ public class Pizza {
 
 	private double diameter;
 	public UnitOfMeasurement diameterUnitOfMeasurement;
+	private double INCH = 2.54;
 	private double price;
 
 	public enum UnitOfMeasurement {
@@ -39,14 +40,13 @@ public class Pizza {
 
 	public double getPricePerUnit() throws RuntimeException {
 		double pricePerUnitForCM = this.price / this.getArea();
-		double inch = 2.54;
 
 		if (this.diameterUnitOfMeasurement.equals(UnitOfMeasurement.CM)) {
 			return pricePerUnitForCM;
 		}
 
 		else if (this.diameterUnitOfMeasurement.equals(UnitOfMeasurement.INCH)) {
-			return pricePerUnitForCM / (inch * inch);
+			return pricePerUnitForCM / (this.INCH * this.INCH);
 		}
 
 		else {

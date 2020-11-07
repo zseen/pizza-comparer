@@ -17,7 +17,6 @@ class PizzaValueComparer {
 	}
 
 	public static ComparisonResult comparePizzas(Pizza firstPizza, Pizza secondPizza) throws RuntimeException {
-
 		ComparisonResult betterValue;
 
 		if (firstPizza.getPricePerUnit() < secondPizza.getPricePerUnit()) {

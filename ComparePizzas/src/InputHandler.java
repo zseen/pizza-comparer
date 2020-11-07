@@ -31,11 +31,7 @@ public class InputHandler {
 
 		}
 
-		try {
-			convertUnitOfMeasurementStringToEnum(potentialUnitOfMeasurement);
-		} catch (Exception e) {
-			System.out.printf("Invalid unit of measurement.");
-		}
+		this.unitOfMeasurement = convertUnitOfMeasurementStringToEnum(potentialUnitOfMeasurement);
 
 	}
 
@@ -67,7 +63,7 @@ public class InputHandler {
 		}
 	}
 
-	private boolean isUnitOfMeasurementValid(String unitOfMeasurement) {
+	private static boolean isUnitOfMeasurementValid(String unitOfMeasurement) {
 		if (unitOfMeasurement == null) {
 			return false;
 		}
@@ -81,11 +77,13 @@ public class InputHandler {
 
 	}
 
-	private void convertUnitOfMeasurementStringToEnum(String unitOfMeasurement) throws RuntimeException {
+	private static Pizza.UnitOfMeasurement convertUnitOfMeasurementStringToEnum(String unitOfMeasurement)
+			throws RuntimeException {
 		if (unitOfMeasurement.equals(Pizza.UnitOfMeasurement.CM.measurement)) {
-			this.unitOfMeasurement = Pizza.UnitOfMeasurement.CM;
+			return Pizza.UnitOfMeasurement.CM;
 		} else if (unitOfMeasurement.equals(Pizza.UnitOfMeasurement.INCH.measurement)) {
-			this.unitOfMeasurement = Pizza.UnitOfMeasurement.INCH;
+			return Pizza.UnitOfMeasurement.INCH;
 		}
+		throw new RuntimeException("Problem with unit of measurement.");
 	}
 }
